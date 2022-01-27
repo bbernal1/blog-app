@@ -40,7 +40,8 @@ blogRouter.post("/:username", (req, res) => {
 blogRouter.put("/:id", (req, res) => {
     const id = req.params.id;
     const blog = req.body;
-    Blog.updateOne({ _id: id }, req.body, (error, result) => {
+    let newBlog;
+    Blog.findOneAndUpdate({ _id: id }, req.body, (error, result) => {
         if (error) {
             res.status(400).json({ message: error.message });
         }
@@ -53,6 +54,16 @@ blogRouter.put("/:id", (req, res) => {
 })
 
 blogRouter.delete("/:id", (req, res) => {
+    const id = req.params.id;
+    const blog = req.body;
+    Blog.deleteOne({ _id: id },(error)=>{
+        if (error) {
+            res.status(400).json({ message: error.message });
+        }
+    })
+    res.status(200).json({
+        message:"blog entry deleted successfully"
+    })
 
 })
 
