@@ -1,4 +1,5 @@
 const express = require("express");
+const Blog = require("../schemas/blog-schema");
 const blogRouter = express.Router();
 
 blogRouter.get("/", (req, res) => {
@@ -8,7 +9,8 @@ blogRouter.get("/", (req, res) => {
 })
 
 blogRouter.get("/:username", (req, res) => {
-
+    const username = req.params.username;
+    
 })
 
 blogRouter.get("/:id", (req, res) => {
