@@ -17,19 +17,15 @@ authRouter.post("/register", (req, res) => {
     const birthday = req.body.birthday;
     const email = req.body.email;
 
-    if (username === undefined || password === undefined || birthday === undefined || email === undefined) {
-        res.status(200).json({
-            message: "missing required information"
-        })
-    }
-    //check if duplicate user
     User.create(user, (error, result) => {
         if (error) {
             res.status(400).json({
                 message: error.message
             });
         }
-        res.status(200).json({ data: result });
+        else {
+            res.status(200).json({ data: result });
+        }
     })
 
 })

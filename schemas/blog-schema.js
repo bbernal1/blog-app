@@ -13,5 +13,6 @@ const blogSchema = mongoose.Schema({
     blog_content:{type: String, required: true},
     private:{type: Boolean, required: true}
 });
+const blogModel = mongoose.model("Blog",blogSchema);
 
-module.exports = mongoose.Model(blog,blogSchema);
+module.exports = blogModel;

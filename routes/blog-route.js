@@ -10,18 +10,49 @@ blogRouter.get("/", (req, res) => {
 
 blogRouter.get("/:username", (req, res) => {
     const username = req.params.username;
-    
-})
 
-blogRouter.get("/:id", (req, res) => {
-
+    Blog.find({ username: username }, (error, result) => {
+        if (error) {
+            res.status(400).json({ message: error.message });
+        }
+        else {
+            res.status(200).json({
+                message: result
+            })
+        }
+    })
 })
 
 blogRouter.post("/:username", (req, res) => {
+    const blog = req.body;
+    console.log(blog)
+    Blog.create(blog, (error, result) => {
+        if (error) {
+            res.status(400).json({ message: error.message });
+        }
+        else {
+            res.status(200).json({ data: result });
+        }
+    })
 
 })
 
-blogRouter.post("/:id", (req, res) => {
+blogRouter.put("/:id", (req, res) => {
+    const id = req.params.id;
+    const blog = req.body;
+    Blog.updateOne({ _id: id }, req.body, (error, result) => {
+        if (error) {
+            res.status(400).json({ message: error.message });
+        }
+        else {
+            res.status(200).json({
+                message: result
+            })
+        }
+    })
+})
+
+blogRouter.delete("/:id", (req, res) => {
 
 })
 
