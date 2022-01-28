@@ -4,7 +4,7 @@
 
 ## Installation Instructions
 ### 1. use npm -i to install the necessary packages
-### 2. Create a mongo DB atlas account. Replace the MONGO_URI environmental variable with your own connection string
+### 2. Create a MongoDB Atlas account. Replace the MONGODB_URI environmental variable with your own connection string
 
 ## Environmental variables
 ### Port
