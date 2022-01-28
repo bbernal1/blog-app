@@ -8,7 +8,7 @@ const mongoConnect = require("./config");
 const swagger = require("swagger-ui-express")
 const swaggerRoute = require("./docs/basic-info")
 const app = express();
-const port = 3000 || process.env.PORT;
+const port = process.env.PORT ||3000;
 
 dotenv.config();
 app.use('/swagger', swagger.serve, swagger.setup(swaggerRoute))
