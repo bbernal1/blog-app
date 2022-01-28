@@ -14,7 +14,7 @@ module.exports = {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/user", // todo input data model
+                                "$ref": "#/components/schemas/user", 
                             },
                         },
                     },
@@ -22,7 +22,9 @@ module.exports = {
                 "responses": {
                     "200": {
                         "description": "OK",
-
+                        "schema": {
+                            "$ref": "#/components/schemas/user", 
+                        }
                     },
                     "400": {
                         "description": "Bad Request",
@@ -109,7 +111,7 @@ module.exports = {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/user", // todo input data model
+                                "$ref": "#/components/schemas/user",
                             },
                         },
                     },
@@ -187,7 +189,7 @@ module.exports = {
     "components": {
         "schemas": {
             "user": {
-                "type": "object", // data type
+                "type": "object", 
                 "properties": {
                     "username": {
                         "type": "string"
@@ -207,7 +209,7 @@ module.exports = {
                 }
             },
             "blog": {
-                "type": "object", // data type
+                "type": "object", 
                 "properties": {
                     "created_by": {
                         "type": "string"
