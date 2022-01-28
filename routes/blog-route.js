@@ -12,7 +12,7 @@ blogRouter.get("/", (req, res) => {
         }
         else {
             res.status(200).json({
-                message: result.filter((entry)=>{
+                message: result.filter((entry) => {
                     return entry.private === false;
                 })
             })
@@ -37,16 +37,25 @@ blogRouter.get("/:username", verifyJWT, (req, res) => {
 })
 
 blogRouter.post("/:username", verifyJWT, (req, res) => {
+    const username = req.params.username;
     const blog = req.body;
-    console.log(blog)
-    Blog.create(blog, (error, result) => {
-        if (error) {
-            res.status(400).json({ message: error.message });
-        }
-        else {
-            res.status(200).json({ data: result });
-        }
-    })
+    const createdBy = blog.created_by;
+    if (createdBy !== username) {
+        res.status(403).json({
+            message: "Username is incorrect"
+        })
+    }
+    else {
+        Blog.create(blog, (error, result) => {
+            if (error) {
+                res.status(400).json({ message: error.message });
+            }
+            else {
+                res.status(200).json({ data: result });
+            }
+        })
+    }
+
 
 })
 

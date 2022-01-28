@@ -9,7 +9,6 @@ module.exports = {
         "/auth/register": {
             "post": {
                 "summary": "Registers a user using the information in the request body."
-                
             }
         },
         "/auth/login": {
@@ -17,46 +16,44 @@ module.exports = {
                 "summary": "Logins with the specified username and password in the request body.",
             }
         },
-        "/blog/username": {
+        "/blog": {
             "get": {
-                "summary": "Returns all of the blogs for the username."
+                "summary": "Returns all public blog posts."
             }
         },
         "/blog/{username}": {
+            "get": {
+                "summary": "Returns all of the blogs for the username."
+            },
             "post": {
                 "summary": "Creates a post using the information in the request body.",
-                "parameters" : [{
-                    "name": "username", 
-                    "in": "path", 
-                    "required": "true", 
-                    "description": "a username", 
-                  }]
-            }
-        },
-        "/blog/id": {
-            "put": {
-                "summary": "updates the post at the specified id with the information in the request body",
-                "parameters" : [{
-                    "name": "id", 
-                    "in": "path", 
-                    
-                    "required": "true", 
-                    "description": "a blog id", 
-                  }]
+                "parameters": [{
+                    "name": "username",
+                    "in": "path",
+                    "required": "true",
+                    "description": "a username",
+                }]
             }
         },
         "/blog/{id}": {
+            "put": {
+                "summary": "updates the post at the specified id with the information in the request body",
+                "parameters": [{
+                    "name": "id",
+                    "in": "path",
+                    "required": "true",
+                    "description": "a blog id",
+                }]
+            },
             "delete": {
                 "summary": "Deletes the post with the specified id",
-                "parameters" : [{
-                    "name": "id", 
-                    "in": "path", 
-                    
-                    "required": "true", 
-                    "description": "a blog id", 
-                  }]
+                "parameters": [{
+                    "name": "id",
+                    "in": "path",
+                    "required": "true",
+                    "description": "a blog id",
+                }]
             }
         }
-
     }
 }
