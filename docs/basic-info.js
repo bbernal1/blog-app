@@ -3,12 +3,12 @@ module.exports = {
     "info": {
         "title": "Blog API",
         "description": "API for interacting with a blog backend written using the express.js framework",
-        "version": "0.1.0"
+        "version": "0.1.0A"
     },
     "paths": {
         "/auth/register": {
             "post": {
-                "summary": "Registers a user using the information request body."
+                "summary": "Registers a user using the information in the request body."
                 
             }
         },
@@ -24,7 +24,7 @@ module.exports = {
         },
         "/blog/{username}": {
             "post": {
-                "summary": "Creates a post from the request body JSON.",
+                "summary": "Creates a post using the information in the request body.",
                 "parameters" : [{
                     "name": "username", 
                     "in": "path", 
@@ -35,7 +35,7 @@ module.exports = {
         },
         "/blog/id": {
             "put": {
-                "summary": "updates the post at the specified id with the request body",
+                "summary": "updates the post at the specified id with the information in the request body",
                 "parameters" : [{
                     "name": "id", 
                     "in": "path", 
@@ -47,7 +47,7 @@ module.exports = {
         },
         "/blog/{id}": {
             "delete": {
-                "summary": "deletes the post with the specified id",
+                "summary": "Deletes the post with the specified id",
                 "parameters" : [{
                     "name": "id", 
                     "in": "path", 
