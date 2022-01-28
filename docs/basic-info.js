@@ -7,7 +7,7 @@ module.exports = {
         "version": "1.0.0"
     },
     "paths": {
-        "/auth/register": {
+        "https://mod2-blog-app.herokuapp.com/auth/register": {
             "post": {
                 "summary": "Registers a user using the information in the request body.",
                 "requestBody": {
@@ -21,7 +21,7 @@ module.exports = {
                 }
             },
         },
-        "/auth/login": {
+        "https://mod2-blog-app.herokuapp.com/auth/login": {
             "post": {
                 "summary": "Logins with the specified username and password in the request body.",
                 "requestBody": {
@@ -42,12 +42,12 @@ module.exports = {
                 }
             }
         },
-        "/blog": {
+        "https://mod2-blog-app.herokuapp.com/blog": {
             "get": {
                 "summary": "Returns all public blog posts."    
             }
         },
-        "/blog/{username}": {
+        "https://mod2-blog-app.herokuapp.com/blog/{username}": {
             "get": {
                 "summary": "Returns all of the blogs for the username.",
                 "parameters": [{
@@ -76,7 +76,7 @@ module.exports = {
                 }
             }
         },
-        "/blog/{id}": {
+        "https://mod2-blog-app.herokuapp.com/blog/{id}": {
             "put": {
                 "summary": "updates the post at the specified id with the information in the request body",
                 "parameters": [{
