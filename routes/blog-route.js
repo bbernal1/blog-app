@@ -1,14 +1,27 @@
 const express = require("express");
 const Blog = require("../schemas/blog-schema");
 const blogRouter = express.Router();
+const verifyJWT = require("../middleware/jwt")
 
 blogRouter.get("/", (req, res) => {
-    res.status(200).json({
-        message: "in blog route"
+    Blog.find((error, result) => {
+        if (error) {
+            res.status(404).json({
+                error: error.message
+            });
+        }
+        else {
+            res.status(200).json({
+                message: result.filter((entry)=>{
+                    return entry.private === false;
+                })
+            })
+        }
+
     })
 })
 
-blogRouter.get("/:username", (req, res) => {
+blogRouter.get("/:username", verifyJWT, (req, res) => {
     const username = req.params.username;
 
     Blog.find({ username: username }, (error, result) => {
@@ -23,7 +36,7 @@ blogRouter.get("/:username", (req, res) => {
     })
 })
 
-blogRouter.post("/:username", (req, res) => {
+blogRouter.post("/:username", verifyJWT, (req, res) => {
     const blog = req.body;
     console.log(blog)
     Blog.create(blog, (error, result) => {
@@ -37,7 +50,7 @@ blogRouter.post("/:username", (req, res) => {
 
 })
 
-blogRouter.put("/:id", (req, res) => {
+blogRouter.put("/:id", verifyJWT, (req, res) => {
     const id = req.params.id;
     const blog = req.body;
     let newBlog;
@@ -53,16 +66,16 @@ blogRouter.put("/:id", (req, res) => {
     })
 })
 
-blogRouter.delete("/:id", (req, res) => {
+blogRouter.delete("/:id", verifyJWT, (req, res) => {
     const id = req.params.id;
     const blog = req.body;
-    Blog.deleteOne({ _id: id },(error)=>{
+    Blog.deleteOne({ _id: id }, (error) => {
         if (error) {
             res.status(400).json({ message: error.message });
         }
     })
     res.status(200).json({
-        message:"blog entry deleted successfully"
+        message: "blog entry deleted successfully"
     })
 
 })

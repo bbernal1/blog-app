@@ -6,10 +6,24 @@ module.exports = {
         "version": "0.1.9"
     },
     "paths": {
-        "/blogs": {
+        "/blog": {
             "get": {
-                "summary": "Returns a list of users.",
-                "description": "Optional extended description in CommonMark or HTML"
+                "summary": "Returns a list of public blog posts.",
+                "description":""
+            }
+        },
+        "/blog/username": {
+            "get": {
+                "summary": "Returns a list of public blog posts.",
+                "parameters" : {
+                    name: "username", 
+                    in: "path", 
+                    schema: {
+                      $ref: "#/schemas/auth", 
+                    },
+                    required: true, 
+                    description: "a blog username", 
+                  },
             }
         }
     }

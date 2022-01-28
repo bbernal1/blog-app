@@ -1,21 +1,19 @@
 const express = require("express");
+const bcrypt = require("bcrypt");
 const User = require("../schemas/user-schema");
-
+const jwt = require("jsonwebtoken")
 const authRouter = express.Router();
 
-authRouter.get("/", (req, res) => {
-    res.status(200).json({
-        message: "in auth route"
-    })
-});
 
-//complete this method first after creating schema
-authRouter.post("/register", (req, res) => {
+authRouter.post("/register", async (req, res) => {
     const user = req.body;
-    const username = req.body.username;
-    const password = req.body.password;
-    const birthday = req.body.birthday;
-    const email = req.body.email;
+    const password = user.password;
+
+    if (password !== undefined) {
+        let salt = Number(process.env.SALT);
+        let hashedPassword = await bcrypt.hash(password, salt);
+        user.password = hashedPassword;
+    }
 
     User.create(user, (error, result) => {
         if (error) {
@@ -27,12 +25,9 @@ authRouter.post("/register", (req, res) => {
             res.status(200).json({ data: result });
         }
     })
-
 })
 
-// authRouter.post("/login", (req, res, next) => {
 
-// })
 authRouter.post("/login", (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
@@ -41,6 +36,8 @@ authRouter.post("/login", (req, res) => {
             message: "missing username and/or password"
         })
     }
+
+
     User.findOne({ username: username }, (error, result) => {
 
         if (error) {
@@ -51,22 +48,25 @@ authRouter.post("/login", (req, res) => {
             res.status(404).json({ message: "User not found" });
         }
         else {
-            res.status(200).json({
-                message: result
+            bcrypt.compare(password, result.password, (error, matching) => {
+                if (matching === false) {
+                    res.status(403).json({ message: "Either username or pasword is incorrect" });
+                }
+                else {
+                    let token = jwt.sign(username, process.env.JWT_SECRET)
+                    res.setHeader("authorization", token);
+                    res.status(200).json({
+                        data: result
+                    })
+                }
             })
+
         }
 
 
 
     })
-    // res.status(200).json({
-    //     message: res.locals.result
-    // })
 
-    //bcrypt.compare()
-
-    //do error checking
-    //login if password matches
 })
 
 module.exports = authRouter
