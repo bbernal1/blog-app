@@ -18,6 +18,16 @@ module.exports = {
                             },
                         },
                     },
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+
+                    },
+                    "400": {
+                        "description": "Bad Request",
+
+                    }
                 }
             },
         },
@@ -39,12 +49,32 @@ module.exports = {
                             },
                         },
                     },
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+
+                    },
+                    "400": {
+                        "description": "Bad Request",
+
+                    }
                 }
             }
         },
         "https://mod2-blog-app.herokuapp.com/blog": {
             "get": {
-                "summary": "Returns all public blog posts."    
+                "summary": "Returns all public blog posts.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+
+                    },
+                    "404": {
+                        "description": "Error",
+
+                    }
+                }
             }
         },
         "https://mod2-blog-app.herokuapp.com/blog/{username}": {
@@ -55,7 +85,17 @@ module.exports = {
                     "in": "path",
                     "required": "true",
                     "description": "a username",
-                }]
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+
+                    },
+                    "400": {
+                        "description": "Bad Request",
+
+                    }
+                }
             },
             "post": {
                 "summary": "Creates a post using the information in the request body.",
@@ -73,6 +113,20 @@ module.exports = {
                             },
                         },
                     },
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+
+                    },
+                    "400": {
+                        "description": "Bad Request",
+
+                    },
+                    "403": {
+                        "description": "Incorrect username",
+
+                    }
                 }
             }
         },
@@ -97,6 +151,16 @@ module.exports = {
                             },
                         },
                     },
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+
+                    },
+                    "400": {
+                        "description": "Bad Request",
+
+                    }
                 }
             },
             "delete": {
@@ -106,7 +170,17 @@ module.exports = {
                     "in": "path",
                     "required": "true",
                     "description": "a blog id",
-                }]
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+
+                    },
+                    "400": {
+                        "description": "Bad Request",
+
+                    }
+                }
             }
         }
     },
@@ -151,7 +225,7 @@ module.exports = {
                         "type": "boolean"
                     }
                 }
-            },
+            }
         }
     }
 }
